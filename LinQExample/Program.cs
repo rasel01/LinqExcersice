@@ -27,7 +27,10 @@ namespace LinQExample
             //    OrderByDescending(p=>p.Key).First();
 
             ef.GetWeekNames();
-            
+
+            ef.GetSpecificWord();
+
+            ef.GetSpecificNumber();
 
             Console.ReadKey();
         }
