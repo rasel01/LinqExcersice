@@ -22,7 +22,7 @@ namespace LinQExample
             var result = list.Where(x => x % 2 == 0);
             foreach (int val in result)
             {
-                Console.WriteLine("Even Numbers are " + val);
+                Console.WriteLine(@" Even Numbers are " + val);
             }
         }
 
@@ -35,7 +35,7 @@ namespace LinQExample
             var result = numberList.Where(num => num != 0).Where(num => num > 0);
             foreach (var value in result)
             {
-                Console.WriteLine("positive numbers are :" + value);
+                Console.WriteLine(@" positive numbers are :" + value);
             }
 
         }
@@ -55,7 +55,7 @@ namespace LinQExample
 
             foreach (var value in sqaureList)
             {
-                Console.WriteLine(value.number + "sqaure value is  :" + value.sqaureval);
+                Console.WriteLine(value.number + @" sqaure value is  :" + value.sqaureval);
 
             }
 
@@ -90,7 +90,7 @@ namespace LinQExample
 
                 foreach (var val in output)
                 {
-                    Console.WriteLine(val.letter + " Occurs : " + val.counter);
+                    Console.WriteLine(val.letter + @" Occurs : " + val.counter);
                 }
                 //Console.WriteLine(output);
             }
@@ -109,7 +109,7 @@ namespace LinQExample
 
             foreach (var val in result)
             {
-                Console.WriteLine("Weekend Name: " + val.name + Environment.NewLine);
+                Console.WriteLine(@"Weekend Name: " + val.name + Environment.NewLine);
             }
         }
 
@@ -119,13 +119,13 @@ namespace LinQExample
         {
             List<string> wordList = new List<string>
             {
-                "ROME","LONDON","NAIROBI","CALIFORNIA","ZURICH","NEW DELHI","AMSTERDAM","ABU DHABI","PARIS","Rasel" 
+                "ROME","LONDON","NAIROBI","CALIFORNIA","ZURICH","NEW DELHI","AMSTERDAM","ABU DHABI","PARIS","Rasel"
             };
             var result = wordList.Where(x => x.FirstOrDefault() == 'R' && x.LastOrDefault() == 'l');
 
             foreach (var val in result)
             {
-                Console.WriteLine("Matching Output : " + val);
+                Console.WriteLine(@"Matching Output : " + val);
 
             }
 
@@ -136,7 +136,7 @@ namespace LinQExample
         //Write a program in C# Sharp to create a list of numbers and display the numbers greater than 80
         public void GetSpecificNumber()
         {
-            List<int>numberList  = new List<int>
+            List<int> numberList = new List<int>
             {
                 80,90,75,9,85,90,91,87,18,20
             };
@@ -144,7 +144,7 @@ namespace LinQExample
 
             foreach (var val in result)
             {
-                Console.WriteLine( val);
+                Console.WriteLine(val);
 
             }
 
@@ -167,8 +167,123 @@ namespace LinQExample
             }
 
 
+
+
         }
 
 
+        //Write a program in C# Sharp to Accept the members of a list through the keyboard and display the members more than a specific value
+
+        public void GetSpecificMember()
+        {
+            List<int> numberList = new List<int>
+            {
+                 10, 48, 52,94,63
+            };
+            Console.WriteLine(@"Take a memeber Number : 10, 48, 52,94,63 ");
+            int input = Console.Read();
+            var result = numberList.Where(x => x > input).Select((n, i) => new { value = n, Index = i });
+            Console.WriteLine(@"output :" + Environment.NewLine);
+            foreach (var val in result)
+            {
+                Console.WriteLine(@"Member: " + val.Index + @" Value: " + val.value);
+
+            }
+
+
+
+
+        }
+
+        //Write a program in C# Sharp to display the top n-th records
+
+        public void GetTopNtimesNumber()
+        {
+            List<int> numberList = new List<int>
+            {
+                5, 7, 13, 24,6,9,8,7
+
+            };
+            Console.WriteLine(@"How many Numbers to print from  : 5, 7, 13, 24,6,9,8,7 ");
+            int input = Convert.ToInt32(Console.ReadLine());
+            var result = numberList.OrderByDescending(x => x).Take(3);
+            Console.WriteLine(@"output :" + Environment.NewLine);
+            foreach (var val in result)
+            {
+                Console.WriteLine(val);
+
+            }
+
+
+
+
+        }
+
+        //Write a program in C# Sharp to find the uppercase words in a string.
+
+        public void GetUpperWord()
+        {
+
+
+            string input = Console.ReadLine();
+            if (input != null)
+            {
+                var result = input.Select(x => x.ToString().ToUpper());
+                Console.WriteLine(@"output :" + Environment.NewLine);
+                foreach (var val in result)
+                {
+                    Console.Write(val);
+
+                }
+            }
+        }
+
+        // Write a program in C# Sharp to convert a string array to a string. 
+
+        public void GetArrayToString()
+        {
+            string[] aStrings = { "rasel", "ifte", "musta", "olid" };
+            var result = String.Join(",", aStrings.Select(x => x.ToString()).ToArray());
+            Console.WriteLine(result);
+
+        }
+
+
+        //Write a program in C# Sharp to find the n-th Maximum grade point achieved by the students from the list of students.
+
+        public void GetMaximumMarker()
+        {
+            List<StdList> list = new List<StdList>
+            {
+                new StdList {ID = 1,Marks = 750,Name = "xx",Grade = 3},
+                new StdList {ID = 2,Marks = 350,Name = "yy",Grade = 2},
+                new StdList {ID = 2,Marks = 100,Name = "xyy",Grade = 2},
+                new StdList {ID = 3,Marks = 100,Name = "zz",Grade = 1},
+                new StdList {ID = 4,Marks = 750,Name = "xxx",Grade = 3}
+            };
+            Console.WriteLine(@"Enter Grade Number : ");
+            int input = Convert.ToInt32(Console.ReadLine());
+            var result = list.Where(x => x.Grade == input).ToList();
+            foreach (var val in result.OrderByDescending(x => x.Grade))
+            {
+                Console.WriteLine(val.ID.ToString(), val.Name, val.Marks.ToString(), val.Grade.ToString());
+            }
+
+            //var result = list.Where()
+            //Console.WriteLine(result);
+
+        }
+
+
+
+
+
+    }
+    public class StdList
+    {
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public int Marks { get; set; }
+        public int Grade { get; set; }
     }
 }
